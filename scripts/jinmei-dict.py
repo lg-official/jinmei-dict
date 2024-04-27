@@ -13,12 +13,13 @@ def append_dict(row, jinmei_dict, itaiji):
     kaki = row[0]
     if re.match(u'^[\u30a1-\u30fa\u30fcぁ-ん]+$', kaki) or re.match(u'^[a-zA-Z]+$', kaki):
         return
-    if yomi in jinmei_dict:
-        for k in create_itaiji_name(kaki, itaiji):
-            if k not in jinmei_dict[yomi]:
-                jinmei_dict[yomi].append(k)
+    if kaki in jinmei_dict:
+        if yomi not in jinmei_dict[kaki]:
+            for k in create_itaiji_name(kaki, itaiji):
+                jinmei_dict[k].append(yomi)
     else:
-        jinmei_dict[yomi] = create_itaiji_name(kaki, itaiji)
+        for k in create_itaiji_name(kaki, itaiji):
+            jinmei_dict[k] = [yomi]
 
 def create_itaiji_name(kaki, itaiji):
     moji_list = []
@@ -28,7 +29,7 @@ def create_itaiji_name(kaki, itaiji):
             l.extend(itaiji[k])
         moji_list.append(l)
     kari_list = list(itertools.product(*moji_list))
-    all_kaki = [kaki]
+    all_kaki = []
     for kari in kari_list:
         all_kaki.append(''.join(kari))
     return all_kaki
