@@ -66,13 +66,13 @@ def main(filepaths):
     with open(seipath, mode='w', encoding='utf_8') as s:
         s.write(json.dumps(sei_dict, ensure_ascii=False))
     sei_counts = count_vocabulary(sei_dict)
-    print('姓の読み仮名数:', sei_counts[0], '姓の漢字候補数:', sei_counts[1])
+    print('姓の読み仮名数:', sei_counts[1], '姓の漢字候補数:', sei_counts[0])
 
     meipath = './mei.json'
     with open(meipath, mode='w', encoding='utf_8') as m:
         m.write(json.dumps(mei_dict, ensure_ascii=False))
     mei_counts = count_vocabulary(mei_dict)
-    print('名の読み仮名数:', mei_counts[0], '名の漢字候補数:', mei_counts[1])
+    print('名の読み仮名数:', mei_counts[1], '名の漢字候補数:', mei_counts[0])
 
 if __name__ == '__main__':
     args = sys.argv
