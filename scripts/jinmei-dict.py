@@ -35,6 +35,8 @@ def create_itaiji_name(kaki, itaiji):
     return all_kaki
 
 def detect_encoding(filename):
+    if filename == '../data/addon/tss_sei.csv' or filename == '../data/addon/tss_mei.csv':
+        return 'cp932'
     with open(filename, 'rb') as rawdata:
         result = chardet.detect(rawdata.read(10000))
     print(f'{filename}: {result["encoding"]}')
