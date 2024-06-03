@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 data/mecab-ipadic-neologd/mecab-user-dict-seed.20200130/mecab-user-dict-seed.20200130.csv
+data/tss
