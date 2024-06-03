@@ -127,3 +127,5 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+data/mecab-ipadic-neologd/mecab-user-dict-seed.20200130/mecab-user-dict-seed.20200130.csv
