@@ -18,9 +18,12 @@ def convert_csv(input_file, output_file):
             type = row[0]
             if type == '姓' or type == '名':
                 for yomi in row[2:]:
-                    converted_row = [row[1], '*', '*', '*', '名詞',
-                                     '固有名詞', '人名', type, '*', '*', '*', yomi, yomi]
-                    writer.writerow(converted_row)
+                    if len(yomi) > 0:
+                        converted_row = [row[1], '*', '*', '*', '名詞',
+                                         '固有名詞', '人名', type, '*', '*', '*', yomi, yomi]
+                        writer.writerow(converted_row)
+                    else:
+                        raise Exception("余分な,があります。")
 
 
 # 関数を実行
