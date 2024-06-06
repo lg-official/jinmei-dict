@@ -1,4 +1,4 @@
 #! /usr/bin/env bash
 
-cp sei.json ../../settings/
-cp mei.json ../../settings/
+cp sei.json ../../mail_helper/settings/
+cp mei.json ../../mail_helper/settings/
