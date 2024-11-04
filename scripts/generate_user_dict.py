@@ -1,8 +1,9 @@
 import csv
+import os
 
 # 入力ファイル名と出力ファイル名を指定
-input_file = '../data/addon/user_dict_seed.csv'
-output_file = '../data/addon/user_dict_generated.csv'
+input_file = f'{os.path.dirname(__file__)}/../data/addon/user_dict_seed.csv'
+output_file = f'{os.path.dirname(__file__)}/../data/addon/user_dict_generated.csv'
 
 # CSVファイルを読み込み、指定の形式に変換する関数
 

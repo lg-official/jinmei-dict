@@ -7,6 +7,7 @@ import re
 from tqdm import tqdm
 import chardet
 import itertools
+import os
 
 def append_dict(row, jinmei_dict, itaiji):
     yomi = row[11]
@@ -35,7 +36,7 @@ def create_itaiji_name(kaki, itaiji):
     return all_kaki
 
 def detect_encoding(filename):
-    if filename == '../data/addon/tss_sei.csv' or filename == '../data/addon/tss_mei.csv':
+    if filename.endswith('tss_sei.csv') or filename.endswith('tss_mei.csv'):
         return 'cp932'
     with open(filename, 'rb') as rawdata:
         result = chardet.detect(rawdata.read(10000))
@@ -50,7 +51,7 @@ def count_vocabulary(jinmei_dict):
     return kaki_count, yomi_count
 
 def main(filepaths):
-    with open('./itaiji.json', mode='r', encoding='utf_8') as f:
+    with open(f'{os.path.dirname(__file__)}/itaiji.json', mode='r', encoding='utf_8') as f:
         itaiji = json.load(f)
 
     sei_dict = dict()
@@ -64,13 +65,13 @@ def main(filepaths):
                 elif row[6] == '人名' and row[7] == '名':
                     append_dict(row, mei_dict, itaiji)
 
-    seipath = './sei.json'
+    seipath = f'{os.path.dirname(__file__)}/sei.json'
     with open(seipath, mode='w', encoding='utf_8') as s:
         s.write(json.dumps(sei_dict, ensure_ascii=False))
     sei_counts = count_vocabulary(sei_dict)
     print('姓の読み仮名数:', sei_counts[1], '姓の漢字候補数:', sei_counts[0])
 
-    meipath = './mei.json'
+    meipath = f'{os.path.dirname(__file__)}/mei.json'
     with open(meipath, mode='w', encoding='utf_8') as m:
         m.write(json.dumps(mei_dict, ensure_ascii=False))
     mei_counts = count_vocabulary(mei_dict)
