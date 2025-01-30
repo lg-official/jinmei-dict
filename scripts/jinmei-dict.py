@@ -77,6 +77,23 @@ def main(filepaths):
     mei_counts = count_vocabulary(mei_dict)
     print('名の読み仮名数:', mei_counts[1], '名の漢字候補数:', mei_counts[0])
 
+    # キーだけをリストとして抽出
+    sei_keys_list = list(sei_dict.keys())
+    mei_keys_list = list(mei_dict.keys())
+
+    # JSONファイルに保存
+    sei_keys_path = f'{os.path.dirname(__file__)}/sei_keys.json'
+    mei_keys_path = f'{os.path.dirname(__file__)}/mei_keys.json'
+
+    with open(sei_keys_path, mode='w', encoding='utf_8') as s:
+        json.dump(sei_keys_list, s, ensure_ascii=False)
+
+    with open(mei_keys_path, mode='w', encoding='utf_8') as m:
+        json.dump(mei_keys_list, m, ensure_ascii=False)
+
+    print('姓のキーだけを配列として保存しました:', sei_keys_path)
+    print('名のキーだけを配列として保存しました:', mei_keys_path)
+
 if __name__ == '__main__':
     args = sys.argv
     filepaths = args[1:]
